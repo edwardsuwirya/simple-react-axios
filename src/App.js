@@ -12,22 +12,20 @@ function App() {
     const [post, setPost] = useState(null);
 
     useEffect(() => {
-        client.get('/1').then((response) => {
+        const getPost = async () => {
+            const response = await client.get('/1');
             setPost(response.data);
-        });
+        };
+        getPost();
     }, []);
 
-    function createPost() {
-        client.post('/', {
-                title: "Hello World!",
-                body: "This is a new post."
-            })
-            .then((response) => {
-                setPost(response.data);
-            });
+    const createPost = async () => {
+        const response = await client.post('/', {
+            title: "Hello World!",
+            body: "This is a new post."
+        })
+        setPost(response.data);
     }
-
-    if (!post) return null;
     return post ? (
         <div>
             <h1>{post.title}</h1>
