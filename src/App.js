@@ -4,20 +4,21 @@ import axios from "axios";
 
 // npm install axios --save
 
-const baseURL = "https://jsonplaceholder.typicode.com/posts";
+const client = axios.create({
+    baseURL: "https://jsonplaceholder.typicode.com/posts"
+});
 
 function App() {
     const [post, setPost] = useState(null);
 
     useEffect(() => {
-        axios.get(baseURL + '/1').then((response) => {
+        client.get('/1').then((response) => {
             setPost(response.data);
         });
     }, []);
 
     function createPost() {
-        axios
-            .post(baseURL, {
+        client.post('/', {
                 title: "Hello World!",
                 body: "This is a new post."
             })
