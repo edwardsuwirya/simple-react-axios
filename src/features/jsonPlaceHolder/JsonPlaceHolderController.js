@@ -1,11 +1,11 @@
 import {useDeps} from "../../shared/depContext";
-import {useEffect, useState} from "react";
+import {useEffect} from "react";
+import useViewState from "../../shared/useViewState";
 
 const JsonPlaceHolderController = () => {
     const {apiClient} = useDeps();
     const {doGet, doPost} = apiClient()
-    const [viewState, setViewState] = useState({isLoading: false, data: null, error: null})
-
+    const [viewState, setViewState] = useViewState();
     useEffect(() => {
         getPost();
     }, []);
