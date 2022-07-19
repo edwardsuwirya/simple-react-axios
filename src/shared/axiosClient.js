@@ -1,7 +1,8 @@
 import axios from "axios";
 
 const clientInstance = axios.create({
-    baseURL: "https://jsonplaceholder.typicode.com/posts"
+    baseURL: process.env.REACT_APP_BASE_URL
+
 });
 
 export default clientInstance;
