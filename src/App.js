@@ -27,7 +27,6 @@ function App() {
             });
     }
 
-    if (!post) return null;
     return post ? (
         <div>
             <h1>{post.title}</h1>
