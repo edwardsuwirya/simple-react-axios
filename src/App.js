@@ -20,7 +20,7 @@ function App() {
 
     const createPost = async () => {
         const response = await doPost({
-            url: '/', body: {
+            url: '/', data: {
                 title: "Hello World!",
                 body: "This is a new post."
             }
