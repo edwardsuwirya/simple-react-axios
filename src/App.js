@@ -1,30 +1,31 @@
 import './App.css';
 import {useEffect, useState} from "react";
-import axios from "axios";
+import {useDeps} from "./shared/depContext";
 
 // npm install axios --save
 
-const client = axios.create({
-    baseURL: "https://jsonplaceholder.typicode.com/posts"
-});
-
 function App() {
+    const {apiClient} = useDeps();
+    const {doGet, doPost} = apiClient()
     const [post, setPost] = useState(null);
+
 
     useEffect(() => {
         const getPost = async () => {
-            const response = await client.get('/1');
-            setPost(response.data);
+            const response = await doGet({url: '/1'});
+            setPost(response);
         };
         getPost();
     }, []);
 
     const createPost = async () => {
-        const response = await client.post('/', {
-            title: "Hello World!",
-            body: "This is a new post."
+        const response = await doPost({
+            url: '/', body: {
+                title: "Hello World!",
+                body: "This is a new post."
+            }
         })
-        setPost(response.data);
+        setPost(response);
     }
     return post ? (
         <div>
